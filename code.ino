@@ -1,23 +1,8 @@
 #include <Servo.h>
 Servo servo2;
 Servo servo3;
-double Q1;
-double Q2;
-void printDouble( double val, unsigned int precision){
-    Serial.print (int(val));  //prints the int part
-    Serial.print("."); // print the decimal point
-    unsigned int frac;
-    if(val >= 0)
-        frac = (val - int(val)) * precision;
-    else
-        frac = (int(val)- val ) * precision;
-    Serial.println(frac,DEC) ;
-} 
-
 
 void moveArmTo(double l1, double l2, double x, double z){
-    double q1;
-    double q2;
   if(z <12.02){
     double curPos2 = servo2.read();
     double curPos3 = servo3.read();
@@ -52,8 +37,7 @@ void moveArmTo(double l1, double l2, double x, double z){
         delay(15);
       }
     }
-    Q1 = q1;
-    Q2 = q2;
+
   }else{
     double curPos2 = servo2.read();
     double curPos3 = servo3.read();
@@ -63,8 +47,7 @@ void moveArmTo(double l1, double l2, double x, double z){
     q2 = q2 * (180/PI);
     q1 = q1+45;
     q2 = q2-45;
-    Q1 = q1;
-    Q2 = q2;
+
     
     // ---------- MOVING SERVO 2 ----------
     if(curPos2 < q1){
@@ -91,10 +74,7 @@ void moveArmTo(double l1, double l2, double x, double z){
         delay(15);
       }
     }
-    
   }
- 
-  
 }
 
 
