@@ -1,8 +1,12 @@
 #include <Servo.h>
+Servo servo1;
 Servo servo2;
 Servo servo3;
+Servo servo4;
 
 void moveArmTo(double l1, double l2, double x, double z){
+  double q1;
+  double q2;
   if(z <12.02){
     double curPos2 = servo2.read();
     double curPos3 = servo3.read();
@@ -77,16 +81,27 @@ void moveArmTo(double l1, double l2, double x, double z){
   }
 }
 
+void closeClaw(){
+  for(int i = 0 ; i <= 180 ; i++){
+    servo4.write(i);
+    delay(30);
+  }
+}
 
+void openClaw(){
+  for(int i = 180 ; i >=0 ; i--){
+    servo4.write(i);
+    delay(30);
+  }
+}
 void setup() {
-  Serial.begin(9600);
+  servo1.attach(4);
   servo2.attach(5);
   servo3.attach(6);
+  servo4.attach(7);
 
 }
 
 void loop() {
-    moveArmTo(6.0,11.0,0,17);
-    moveArmTo(6.0,11.0,17,0);
-
+  
 }
